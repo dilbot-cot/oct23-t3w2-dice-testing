@@ -1,7 +1,9 @@
-const { rollDice, rollDiceWithAdvantage } = require("./diceRolling");
+const { rollDice, rollDiceWithAdvantage, rollDiceWithDisadvantage } = require("./diceRolling");
 
 console.log(rollDice());
 console.log(rollDice(20));
 console.log(rollDice(12));
 
 console.log(rollDiceWithAdvantage())
+
+console.log(rollDiceWithDisadvantage());
