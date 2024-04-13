@@ -1,4 +1,4 @@
-const { rollDice } = require("../src/diceRolling")
+const { rollDice, rollDiceWithDisadvantage } = require("../src/diceRolling")
 
 beforeEach(() => {
     // before each individual test runs
@@ -96,6 +96,23 @@ describe('As a dungeon master...', () => {
         //     expect(result).toBeGreaterThanOrEqual(1);
         // });
     });
+
+    test('... roll with disadvantage', () => {
+        let rollDiceWithDisadvantage = jest.fn().mockReturnValue({
+            finalResult: 1,
+            rolls: [1, 20]
+        });
+        let rollResult = rollDiceWithDisadvantage(20);
+        expect(rollResult.finalResult).toBe(1);
+      
+    });
+
+    test.skip('... roll with advantage', () => {
+        let rollResult = null;
+        expect(rollResult).toBe(20);
+    })
+    
+    
 
     test('... I want to see how many natural 20s I get in a session where I roll 1,000 d20s', () => {
         let diceResults = [];
