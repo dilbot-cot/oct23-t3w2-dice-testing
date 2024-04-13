@@ -24,5 +24,45 @@ describe('As a casual game ...', () => {
     expect(result).toBeLessThanOrEqual(6);
     expect(result).toBeGreaterThanOrEqual(1);
   });
+});
 
+describe('As a dungeon master...', () => {
+    describe('... I want to roll a variety of dice sizes, such as...', () => {
+      
+        test('D6', () => {
+            let result = rollDice();
+
+            expect(result).toBeLessThanOrEqual(6);
+            expect(result).toBeGreaterThanOrEqual(1);
+        });
+
+        test('D8', () => {
+            let result = rollDice(8);
+
+            expect(result).toBeLessThanOrEqual(8);
+            expect(result).toBeGreaterThanOrEqual(1);
+        });
+
+        test('D10', () => {
+            let result = rollDice(10);
+
+            expect(result).toBeLessThanOrEqual(10);
+            expect(result).toBeGreaterThanOrEqual(1);
+        });
+
+        test('D12', () => {
+            let result = rollDice(12);
+
+            expect(result).toBeLessThanOrEqual(12);
+            expect(result).toBeGreaterThanOrEqual(1);
+        });
+
+        test('D20', () => {
+            let result = rollDice(20);
+
+            expect(result).toBeLessThanOrEqual(20);
+            expect(result).toBeGreaterThanOrEqual(1);
+        });
+    })
+    
 });
