@@ -29,40 +29,88 @@ describe('As a casual game ...', () => {
 describe('As a dungeon master...', () => {
     describe('... I want to roll a variety of dice sizes, such as...', () => {
       
-        test('D6', () => {
-            let result = rollDice();
+        let diceVariety = [
+            {
+                diceSize: 4,
+                diceName: "d4"
+            },
+            {
+                diceSize: 6,
+                diceName: "d6"
+            },
+            {
+                diceSize: 8,
+                diceName: "d8"
+            },
+            {
+                diceSize: 10,
+                diceName: "d10"
+            },
+            {
+                diceSize: 12,
+                diceName: "d12"
+            },
+            {
+                diceSize: 20,
+                diceName: "d20"
+            }
+        ];
 
-            expect(result).toBeLessThanOrEqual(6);
-            expect(result).toBeGreaterThanOrEqual(1);
-        });
+        test.each(diceVariety)("$diceName", (diceObject) => {
+            let diceResult = rollDice(diceObject.diceSize);
+            expect(diceResult).toBeGreaterThan(0);
+            expect(diceResult).toBeLessThanOrEqual(diceObject.diceSize);
+        })
+        // test('D6', () => {
+        //     let result = rollDice();
 
-        test('D8', () => {
-            let result = rollDice(8);
+        //     expect(result).toBeLessThanOrEqual(6);
+        //     expect(result).toBeGreaterThanOrEqual(1);
+        // });
 
-            expect(result).toBeLessThanOrEqual(8);
-            expect(result).toBeGreaterThanOrEqual(1);
-        });
+        // test('D8', () => {
+        //     let result = rollDice(8);
 
-        test('D10', () => {
-            let result = rollDice(10);
+        //     expect(result).toBeLessThanOrEqual(8);
+        //     expect(result).toBeGreaterThanOrEqual(1);
+        // });
 
-            expect(result).toBeLessThanOrEqual(10);
-            expect(result).toBeGreaterThanOrEqual(1);
-        });
+        // test('D10', () => {
+        //     let result = rollDice(10);
 
-        test('D12', () => {
-            let result = rollDice(12);
+        //     expect(result).toBeLessThanOrEqual(10);
+        //     expect(result).toBeGreaterThanOrEqual(1);
+        // });
 
-            expect(result).toBeLessThanOrEqual(12);
-            expect(result).toBeGreaterThanOrEqual(1);
-        });
+        // test('D12', () => {
+        //     let result = rollDice(12);
 
-        test('D20', () => {
-            let result = rollDice(20);
+        //     expect(result).toBeLessThanOrEqual(12);
+        //     expect(result).toBeGreaterThanOrEqual(1);
+        // });
 
-            expect(result).toBeLessThanOrEqual(20);
-            expect(result).toBeGreaterThanOrEqual(1);
-        });
-    })
+        // test('D20', () => {
+        //     let result = rollDice(20);
+
+        //     expect(result).toBeLessThanOrEqual(20);
+        //     expect(result).toBeGreaterThanOrEqual(1);
+        // });
+    });
+
+    test('... I want to see how many natural 20s I get in a session where I roll 1,000 d20s', () => {
+        let diceResults = [];
+        for (let i = 0; i < 1000; i++) {
+            diceResults.push(rollDice(20));
+        }
+        console.log(diceResults);
+        console.log(diceResults.length);
+
+        let arrayOfNatural20s = diceResults.filter((result) => result == 20);
+        console.log(`Number of natural 20s is: ${arrayOfNatural20s.length}`);
+        console.log(`The likelyhood of this result is ${arrayOfNatural20s.length / 10}%`);
+
+        expect(diceResults.length).toBe(1000);
+        expect(diceResults).toContain(20);
+    });
     
 });
